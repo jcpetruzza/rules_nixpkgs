@@ -8,7 +8,6 @@ dependencies on rules_go for those who don't need go toolchain.
 """
 
 load("//nixpkgs:nixpkgs.bzl", "nixpkgs_package")
-load("@bazel_tools//tools/cpp:lib_cc_configure.bzl", "get_cpu_value")
 load("@io_bazel_rules_go//go/private:platforms.bzl", "PLATFORMS")
 
 def _detect_host_platform(ctx):
@@ -150,7 +149,6 @@ declare_toolchains("{goos}", "{goarch}")
 """
 
 def _nixpkgs_go_toolchain_impl(repository_ctx):
-    cpu = get_cpu_value(repository_ctx)
     goos, goarch = _detect_host_platform(repository_ctx)
     content = go_toolchain_func.format(
         sdk_repo = repository_ctx.attr.sdk_repo,
